@@ -17,3 +17,16 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+/**
+ * Test des models de l'api
+ */
+Route::get('/', function (){
+    $visits = \App\Models\Visit::all();
+    foreach ($visits as $visit){
+        $visit->employee;
+    }
+    return response()->json($visits);
+});
+
+
+
