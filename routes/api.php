@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ExpensesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,13 @@ Route::get('/', function (){
     return response()->json($visit);
     //test
 });
+
+/**
+ *
+ * Expenses
+ */
+
+Route::apiResource('expenses',ExpensesController::class);
 
 
 

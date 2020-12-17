@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class ExpenseInPackage extends Model
 {
     use HasFactory;
+
 }
