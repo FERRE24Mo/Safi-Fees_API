@@ -39,3 +39,14 @@ Route::apiResource('expenses',ExpensesController::class);
 
 Route::apiResource('employees',\App\Http\Controllers\API\EmployeesController::class);
 
+
+/**
+ *
+ * Sheets
+ */
+
+//Route::apiResource('sheets',\App\Http\Controllers\API\SheetsController::class);
+
+Route::get('sheets',[\App\Http\Controllers\API\SheetsController::class,'index']);
+Route::get('sheets/current',[\App\Http\Controllers\API\SheetsController::class,'current']);
+
