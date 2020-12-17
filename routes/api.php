@@ -34,7 +34,8 @@ Route::get('/', function (){
  * Expenses
  */
 
+
 Route::apiResource('expenses',ExpensesController::class);
 
-
+Route::apiResource('employees',\App\Http\Controllers\API\EmployeesController::class);
 

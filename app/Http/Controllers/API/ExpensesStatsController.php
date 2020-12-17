@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\ExpensePackageType;
 use Illuminate\Http\Request;
 
-class ExpensesController extends Controller
+class ExpensesStatsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class ExpensesController extends Controller
      */
     public function index()
     {
-        return response()->json(ExpensePackageType::all());
+        //
     }
 
     /**
@@ -37,9 +36,7 @@ class ExpensesController extends Controller
      */
     public function show($id)
     {
-        $expense = ExpensePackageType::find($id);
-
-        return response()->json($expense);
+        //
     }
 
     /**
@@ -51,13 +48,8 @@ class ExpensesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $expense = ExpensePackageType::find($id);
-
-        $expense->amount = $request->input('amount');
-
-        return response()->json($expense->save());
+        //
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -70,5 +62,8 @@ class ExpensesController extends Controller
         //
     }
 
-
+    public function stats(){
+        //$stats =
+        return response()->json(['message'=>'success']);
+    }
 }

@@ -9,6 +9,8 @@ class Employee extends Model
 {
     use HasFactory;
 
+    protected $hidden = ['password','token'];
+
     public function visits(){
         return $this->hasMany('App\Models\Visit');
     }

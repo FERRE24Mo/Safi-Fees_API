@@ -9,7 +9,8 @@ class Visit extends Model
 {
     use HasFactory;
 
-    public function employee(){
+    public function employee()
+    {
         return $this->belongsTo('App\Models\Employee');
     }
 
