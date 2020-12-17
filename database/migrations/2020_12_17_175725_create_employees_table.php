@@ -17,7 +17,7 @@ class CreateEmployeesTable extends Migration
             $table->integer('id', true);
             $table->string('code', 5)->nullable();
             $table->integer('leader_id')->nullable()->index('leader_id');
-            $table->integer('district_id')->index('departement_id');
+            $table->integer('sectorDistrict_id')->index('departement_id');
             $table->string('postalCode')->nullable();
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();

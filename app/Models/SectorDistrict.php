@@ -14,4 +14,9 @@ class SectorDistrict extends Model
         return $this->hasMany('App\Models\Employee');
     }
 
+    public function sector(){
+        return $this->belongsTo('App\Models\Sector');
+    }
+
+
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVisitrePortsTable extends Migration
+class CreateVisitPortsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateVisitrePortsTable extends Migration
      */
     public function up()
     {
-        Schema::create('visitre_ports', function (Blueprint $table) {
+        Schema::create('visit_ports', function (Blueprint $table) {
             $table->integer('id', true);
             $table->integer('visits_id')->index('visits_id');
             $table->dateTime('creationDate')->nullable();
@@ -30,6 +30,6 @@ class CreateVisitrePortsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('visitre_ports');
+        Schema::dropIfExists('visit_ports');
     }
 }

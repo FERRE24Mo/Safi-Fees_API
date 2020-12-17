@@ -15,7 +15,7 @@ class AddForeignKeysToExpenseSheetsTable extends Migration
     {
         Schema::table('expense_sheets', function (Blueprint $table) {
             $table->foreign('employee_id', 'fk_employe_ficheFrais')->references('id')->on('employees')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('sheetState_id', 'fk_etat_ficheFrais')->references('id')->on('expense_sheet_states')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->foreign('expenseSheetState_id', 'fk_etat_ficheFrais')->references('id')->on('expense_sheet_states')->onUpdate('NO ACTION')->onDelete('NO ACTION');
         });
     }
 

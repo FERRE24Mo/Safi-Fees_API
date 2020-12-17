@@ -9,8 +9,10 @@ class Sector extends Model
 {
     use HasFactory;
 
-    public function employees()
+    public function sectorDistricts()
     {
-        return $this->hasMany('App\Models\Employee');
+        return $this->hasMany('App\Models\SectorDistrict');
     }
+
+
 }

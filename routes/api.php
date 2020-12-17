@@ -44,10 +44,9 @@ Route::apiResource('employees',\App\Http\Controllers\API\EmployeesController::cl
  *
  * Sheets
  */
-//Route::apiResource('sheets',\App\Http\Controllers\API\SheetsController::class);
-
-Route::get('sheets',[\App\Http\Controllers\API\SheetsController::class,'index']);
 Route::get('sheets/current',[\App\Http\Controllers\API\SheetsController::class,'current']);
+Route::apiResource('sheets',\App\Http\Controllers\API\SheetsController::class);
+
 
 
 /**

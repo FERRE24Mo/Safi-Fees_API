@@ -20,8 +20,6 @@ class ProfilsController extends Controller
     public function index()
     {
         $employees = Employee::all();
-        $employees->sector;
-        $employees->sectorDistrict;
 
         return response()->json($employees);
     }
@@ -47,8 +45,8 @@ class ProfilsController extends Controller
     {
         $employee = Employee::find($id);
 
-        //$employee->sector;
-        $employee->sectorDistrict;
+        dd($employee->sectorDistrict);
+
         return response()->json($employee);
     }
 

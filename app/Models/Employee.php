@@ -15,10 +15,6 @@ class Employee extends Model
         return $this->hasMany('App\Models\Visit');
     }
 
-    public function sector(){
-        return $this->belongsTo('App\Models\Sector');
-    }
-
     public function sectorDistrict(){
         return $this->belongsTo('App\Models\SectorDistrict');
     }

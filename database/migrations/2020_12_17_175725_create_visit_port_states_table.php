@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVisitrePortStatesTable extends Migration
+class CreateVisitPortStatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateVisitrePortStatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('visitre_port_states', function (Blueprint $table) {
+        Schema::create('visit_port_states', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('name');
         });
@@ -26,6 +26,6 @@ class CreateVisitrePortStatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('visitre_port_states');
+        Schema::dropIfExists('visit_port_states');
     }
 }
