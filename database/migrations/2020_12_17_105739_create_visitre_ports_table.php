@@ -19,10 +19,7 @@ class CreateVisitrePortsTable extends Migration
             $table->dateTime('creationDate')->nullable();
             $table->string('comment', 2048)->nullable();
             $table->integer('starScore');
-            $table->integer('visitReportStates_id')->default(0)->index('reportState_id');
-            $table->foreign('visits_id', 'visitReports_ibfk_1')->references('id')->on('visits')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('visitReportStates_id', 'visitReports_ibfk_2')->references('id')->on('visitre_port_states')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-
+            $table->integer('visitReportState_id')->default(0)->index('reportState_id');
         });
     }
 

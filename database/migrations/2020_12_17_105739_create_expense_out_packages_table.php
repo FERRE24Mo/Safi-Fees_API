@@ -18,10 +18,7 @@ class CreateExpenseOutPackagesTable extends Migration
             $table->string('description')->nullable();
             $table->decimal('amount', 10);
             $table->string('unit', 16);
-            $table->integer('expenseProofs_id')->nullable()->index('fk_outPackage_justificatory1_idx');
-            $table->foreign('expenseProofs_id', 'expenseOutPackages_ibfk_1')->references('id')->on('expense_proofs')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('id', 'expenseOutPackages_ibfk_2')->references('id')->on('expenses')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-
+            $table->integer('expenseProof_id')->nullable()->index('fk_outPackage_justificatory1_idx');
         });
     }
 

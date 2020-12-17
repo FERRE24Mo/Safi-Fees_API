@@ -21,8 +21,6 @@ class CreateMedicinesTable extends Migration
             $table->string('composition', 100)->nullable();
             $table->string('effects', 100)->nullable();
             $table->string('contraindication', 100)->nullable();
-            $table->foreign('family_id', 'fk_medicine_1')->references('id')->on('medecine_families')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-
         });
     }
 

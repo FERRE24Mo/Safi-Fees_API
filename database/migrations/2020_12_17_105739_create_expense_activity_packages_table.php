@@ -18,12 +18,8 @@ class CreateExpenseActivityPackagesTable extends Migration
             $table->string('description');
             $table->decimal('amount', 10);
             $table->string('unit', 8);
-            $table->integer('expenseProofs_id')->nullable()->index('expenseProofs_id');
-            $table->integer('activities_id')->index('activities_id');
-            $table->foreign('id', 'expenseActivityPackages_ibfk_1')->references('id')->on('expenses')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('activities_id', 'expenseActivityPackages_ibfk_2')->references('id')->on('activities')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('expenseProofs_id', 'expenseActivityPackages_ibfk_3')->references('id')->on('expense_proofs')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-
+            $table->integer('expenseProof_id')->nullable()->index('expenseProofs_id');
+            $table->integer('activity_id')->index('activities_id');
         });
     }
 

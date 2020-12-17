@@ -16,11 +16,8 @@ class CreateActivitiesPractitionersTable extends Migration
         Schema::create('activities_practitioners', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('specialization')->nullable();
-            $table->integer('activities_id')->index('ac_num');
+            $table->integer('activity_id')->index('ac_num');
             $table->integer('practitioner_id')->index('fk_invite_1_idx');
-            $table->foreign('activities_id', 'fk_ca_id')->references('id')->on('activities')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('practitioner_id', 'fk_invite_1')->references('id')->on('practitioners')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-
         });
     }
 

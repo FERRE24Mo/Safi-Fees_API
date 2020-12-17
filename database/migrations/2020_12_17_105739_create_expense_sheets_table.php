@@ -22,9 +22,6 @@ class CreateExpenseSheetsTable extends Migration
             $table->integer('sheetState_id')->index('fk_etat_ficheFrais');
             $table->date('creationDate');
             $table->date('modificationDate')->nullable();
-            $table->foreign('employee_id', 'fk_employe_ficheFrais')->references('id')->on('employees')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('sheetState_id', 'fk_etat_ficheFrais')->references('id')->on('expense_sheet_states')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-
         });
     }
 

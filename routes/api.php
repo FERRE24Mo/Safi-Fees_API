@@ -21,11 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  * Test des models de l'api
  */
 Route::get('/', function (){
-    $visits = \App\Models\Visit::all();
-    foreach ($visits as $visit){
-        $visit->employee;
-    }
-    return response()->json($visits);
+    $visit = \App\Models\Employee::find(56);
+    $visit->visits;
+    $visit->visits[0]->practitioner;
+    return response()->json($visit);
 });
 
 

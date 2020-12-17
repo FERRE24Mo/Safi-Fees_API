@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSectorDistrictsTable extends Migration
+class CreateSectorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateSectorDistrictsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sector_districts', function (Blueprint $table) {
+        Schema::create('sectors', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('name')->nullable();
-            $table->integer('sector_id')->index('fk_district_sector1_idx');
-            $table->foreign('sector_id', 'fk_district_sector1')->references('id')->on('sectors')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-
+            $table->integer('leader_id')->nullable()->index('leader_id');
         });
     }
 
@@ -29,6 +27,6 @@ class CreateSectorDistrictsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sector_districts');
+        Schema::dropIfExists('sectors');
     }
 }

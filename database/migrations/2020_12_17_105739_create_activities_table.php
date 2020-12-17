@@ -24,10 +24,7 @@ class CreateActivitiesTable extends Migration
             $table->dateTime('validationDate')->nullable();
             $table->decimal('allocatedBudget', 10);
             $table->string('unit', 8);
-            $table->integer('activityStates_id')->nullable()->index('caState_id');
-            $table->foreign('activityStates_id', 'fk_caState_id')->references('id')->on('activity_states')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('employee_id', 'fk_complementaryActivities_1')->references('id')->on('employees')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-
+            $table->integer('activityState_id')->nullable()->index('caState_id');
         });
     }
 

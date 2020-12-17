@@ -15,13 +15,10 @@ class CreateExpensesTable extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('expenseSheets_id')->index('expenseSheets_id');
-            $table->integer('expenseStates_id')->index('expenseStates_id');
+            $table->integer('expenseSheet_id')->index('expenseSheets_id');
+            $table->integer('expenseState_id')->index('expenseStates_id');
             $table->integer('quantity')->nullable()->default(0);
             $table->date('creationDate');
-            $table->foreign('expenseSheets_id', 'expenses_ibfk_1')->references('id')->on('expense_sheets')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('expenseStates_id', 'expenses_ibfk_2')->references('id')->on('expense_states')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-
         });
     }
 

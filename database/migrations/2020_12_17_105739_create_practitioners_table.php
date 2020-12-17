@@ -22,8 +22,6 @@ class CreatePractitionersTable extends Migration
             $table->integer('notorietyCoeff')->nullable();
             $table->string('complementarySpeciality', 50)->nullable();
             $table->integer('district_id')->nullable()->index('fk_practitioner_department1_idx');
-            $table->foreign('district_id', 'fk_practitioner_department1')->references('id')->on('sector_districts')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-
         });
     }
 

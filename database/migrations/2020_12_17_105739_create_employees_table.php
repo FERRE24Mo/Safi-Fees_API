@@ -30,9 +30,6 @@ class CreateEmployeesTable extends Migration
             $table->date('entryDate')->nullable();
             $table->string('token', 64)->nullable();
             $table->integer('timespan')->nullable();
-            $table->foreign('district_id', 'fk_departement')->references('id')->on('sector_districts')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->foreign('leader_id', 'fk_leader_id')->references('id')->on('employees')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-
         });
     }
 
