@@ -28,5 +28,8 @@ Route::get('/', function (){
     //a
 });
 
-
+/**
+ * Sheets
+ */
+Route::apiResource('sheets',\App\Http\Controllers\API\SheetsController::class);
 
