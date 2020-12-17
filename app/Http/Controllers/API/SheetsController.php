@@ -22,8 +22,7 @@ class SheetsController extends Controller
     }
 
     public function current(){
-
-        $currentSheet = ExpenseSheet::where('sheetState_id', 1);
+        $currentSheet = ExpenseSheet::firstwhere('sheetState_id',1);
 
         return response()->json($currentSheet);
     }
@@ -31,7 +30,6 @@ class SheetsController extends Controller
     public function currentUpdate($request, $id){
 
         $currentSheet = ExpenseSheet::where('sheetState_id', 1);
-        $currentSheet =
 
         return response()->json($currentSheet);
     }

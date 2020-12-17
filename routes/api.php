@@ -31,5 +31,8 @@ Route::get('/', function (){
 /**
  * Sheets
  */
-Route::apiResource('sheets',\App\Http\Controllers\API\SheetsController::class);
+//Route::apiResource('sheets',\App\Http\Controllers\API\SheetsController::class);
+
+Route::get('sheets',[\App\Http\Controllers\API\SheetsController::class,'index']);
+Route::get('sheets/current',[\App\Http\Controllers\API\SheetsController::class,'current']);
 
