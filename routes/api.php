@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 /**
  * Test des models de l'api
  */
-Route::get('/', function (){
+Route::get('/', function () {
     $visit = \App\Models\Employee::find(56);
     $visit->visits;
     $visit->visits[0]->practitioner;
@@ -44,9 +44,16 @@ Route::apiResource('employees',\App\Http\Controllers\API\EmployeesController::cl
  *
  * Sheets
  */
-
 //Route::apiResource('sheets',\App\Http\Controllers\API\SheetsController::class);
 
 Route::get('sheets',[\App\Http\Controllers\API\SheetsController::class,'index']);
 Route::get('sheets/current',[\App\Http\Controllers\API\SheetsController::class,'current']);
+
+
+/**
+ * profils
+ */
+Route::apiResource('profils',\App\Http\Controllers\API\ProfilsController::class);
+
+
 
