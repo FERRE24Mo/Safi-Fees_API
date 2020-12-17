@@ -20,13 +20,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 /**
  * Test des models de l'api
  */
-Route::get('/', function (){
+Route::get('/', function () {
     $visit = \App\Models\Employee::find(56);
     $visit->visits;
     $visit->visits[0]->practitioner;
     return response()->json($visit);
     //a
 });
+
+/**
+ * profils
+ */
+Route::apiResource('profils',\App\Http\Controllers\API\ProfilsController::class);
+
+
 
 
 
