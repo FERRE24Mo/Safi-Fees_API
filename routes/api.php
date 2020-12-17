@@ -25,7 +25,7 @@ Route::get('/', function (){
     $visit->visits;
     $visit->visits[0]->practitioner;
     return response()->json($visit);
-    //a
+    //test
 });
 
 
