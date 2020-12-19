@@ -45,7 +45,7 @@ class ProfilsController extends Controller
     {
         $employee = Employee::find($id);
 
-        dd($employee->sectorDistrict);
+        dd($employee->leader);
 
         return response()->json($employee);
     }

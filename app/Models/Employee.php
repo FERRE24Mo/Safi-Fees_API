@@ -16,7 +16,12 @@ class Employee extends Model
     }
 
     public function sectorDistrict(){
-        return $this->belongsTo('App\Models\SectorDistrict');
+        return $this->belongsTo(SectorDistrict::class, 'sectorDistrict_id');
+    }
+
+    public function leader(){
+        return $this->belongsTo(self::class, 'leader_id');
+
     }
 
 }
