@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\ExpenseSheet;
 use Illuminate\Http\Request;
+use Jenssegers\Date\Date;
 
 class SheetsController extends Controller
 {
@@ -22,16 +23,24 @@ class SheetsController extends Controller
     }
 
     public function current(){
-        $currentSheet = ExpenseSheet::firstwhere('sheetState_id',1);
 
-        return response()->json($currentSheet);
+        $date = new Date();
+        $date = $date::now()->format('Y-m');
+
+
+        $currentSheet = ExpenseSheet::where('creationDate', 'like', $date . '-%')->get();
+
+        return response()->json([$currentSheet, $date]);
     }
 
-    public function currentUpdate($request, $id){
+    public function last(){
 
-        $currentSheet = ExpenseSheet::where('sheetState_id', 1);
+        $date = new Date();
+        $date = $date::now()->sub('1 month')->format('Y-m');
 
-        return response()->json($currentSheet);
+        $currentSheet = ExpenseSheet::where('creationDate', 'like', $date . '-%')->get();
+
+        return response()->json([$currentSheet]);
     }
 
     /**
@@ -65,7 +74,9 @@ class SheetsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $currentSheet = ExpenseSheet::find($id);
+
+        return response()->json($currentSheet);
     }
 
     /**
