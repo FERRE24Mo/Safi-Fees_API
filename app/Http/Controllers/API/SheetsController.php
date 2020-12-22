@@ -43,6 +43,31 @@ class SheetsController extends Controller
         return response()->json([$currentSheet]);
     }
 
+    public function historical($employee_id){
+
+        $sheets = ExpenseSheet::where('expenseSheetState_id','<>','1')->where('employee_id', $employee_id)->get();
+
+        return response()->json([$sheets]);
+    }
+
+    public function validated($employee_id){
+        $sheets = ExpenseSheet::where('expenseSheetState_id','5','and','3')->where('employee_id', $employee_id)->get();
+
+        return response()->json([$sheets]);
+    }
+
+    public function unvalidated($employee_id){
+        $sheets = ExpenseSheet::where('expenseSheetState_id','4')->where('employee_id', $employee_id)->get();
+
+        return response()->json([$sheets]);
+    }
+
+    public function waitingAndError($employee_id){
+        $sheets = ExpenseSheet::where('expenseSheetState_id','6','and','2')->where('employee_id', $employee_id)->get();
+
+        return response()->json([$sheets]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
