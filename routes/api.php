@@ -15,9 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 /**
  * Test des models de l'api
  */
@@ -29,30 +26,55 @@ Route::get('/', function () {
     //test
 });
 
-/**
- *
- * Expenses
- */
-
-
-Route::apiResource('expenses',ExpensesController::class);
-
-Route::apiResource('employees',\App\Http\Controllers\API\EmployeesController::class);
-
-
-/**
- *
- * Sheets
- */
-Route::get('sheets/current',[\App\Http\Controllers\API\SheetsController::class,'current']);
-Route::apiResource('sheets',\App\Http\Controllers\API\SheetsController::class);
 
 
 
-/**
- * profils
- */
-Route::apiResource('profils',\App\Http\Controllers\API\ProfilsController::class);
+
+
+//token jwt
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', [\App\Http\Controllers\Api\AuthController::class , 'login']);
+    Route::post('logout', [\App\Http\Controllers\Api\AuthController::class , 'logout']);
+    Route::post('refresh', [\App\Http\Controllers\Api\AuthController::class , 'refresh']);
+    Route::post('me', [\App\Http\Controllers\Api\AuthController::class , 'me']);
+
+});
+
+//securisation of the api
+Route::middleware('jwt.auth')->group(function (){
+
+    /**
+     *
+     * Expenses
+     */
+    Route::apiResource('expenses',ExpensesController::class);
+
+    /**
+     *
+     * Employees
+     */
+    Route::apiResource('employees',\App\Http\Controllers\API\EmployeesController::class);
+
+    /**
+     *
+     * Sheets
+     */
+    Route::get('sheets/current',[\App\Http\Controllers\API\SheetsController::class,'current']);
+    Route::apiResource('sheets',\App\Http\Controllers\API\SheetsController::class);
+
+
+    /**
+     * profils
+     */
+    Route::apiResource('profils',\App\Http\Controllers\API\ProfilsController::class);
+});
+
 
 
 
