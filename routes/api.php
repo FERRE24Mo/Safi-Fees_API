@@ -65,8 +65,8 @@ Route::middleware('jwt.auth')->group(function (){
      *
      * Sheets
      */
-    Route::get('sheets/current',[\App\Http\Controllers\API\SheetsController::class,'current']);
-    Route::get('sheets/last',[\App\Http\Controllers\API\SheetsController::class,'last']);
+    Route::get('sheets/{employee_id}/current',[\App\Http\Controllers\API\SheetsController::class,'current']);
+    Route::get('sheets/{employee_id}/last',[\App\Http\Controllers\API\SheetsController::class,'last']);
 
     Route::apiResource('sheets',\App\Http\Controllers\API\SheetsController::class);
 

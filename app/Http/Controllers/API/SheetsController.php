@@ -22,23 +22,23 @@ class SheetsController extends Controller
 
     }
 
-    public function current(){
+    public function current($employee_id){
 
         $date = new Date();
         $date = $date::now()->format('Y-m');
 
 
-        $currentSheet = ExpenseSheet::where('creationDate', 'like', $date . '-%')->get();
+        $currentSheet = ExpenseSheet::where('creationDate', 'like', $date . '-%')->where('employee_id', $employee_id)->get();
 
-        return response()->json([$currentSheet, $date]);
+        return response()->json([$currentSheet]);
     }
 
-    public function last(){
+    public function last($employee_id){
 
         $date = new Date();
         $date = $date::now()->sub('1 month')->format('Y-m');
 
-        $currentSheet = ExpenseSheet::where('creationDate', 'like', $date . '-%')->get();
+        $currentSheet = ExpenseSheet::where('creationDate', 'like', $date . '-%')->where('employee_id', $employee_id)->get();
 
         return response()->json([$currentSheet]);
     }
