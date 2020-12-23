@@ -21,6 +21,10 @@ class ProfilsController extends Controller
     {
         $employees = Employee::all();
 
+        foreach ($employees as $employee){
+            $employee->getAllInformations();
+        }
+
         return response()->json($employees);
     }
 
@@ -45,7 +49,7 @@ class ProfilsController extends Controller
     {
         $employee = Employee::find($id);
 
-        dd($employee->leader);
+        $employee->getAllInformations();
 
         return response()->json($employee);
     }
@@ -60,7 +64,10 @@ class ProfilsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $employee = Employee::find($id);
+
+        return $employee->update($request->all());
+
     }
 
     /**

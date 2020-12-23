@@ -57,12 +57,6 @@ Route::middleware('jwt.auth')->group(function (){
 
     /**
      *
-     * Employees
-     */
-    Route::apiResource('employees',\App\Http\Controllers\API\EmployeesController::class);
-
-    /**
-     *
      * Sheets
      */
     Route::get('sheets/current',[\App\Http\Controllers\API\SheetsController::class,'current']);

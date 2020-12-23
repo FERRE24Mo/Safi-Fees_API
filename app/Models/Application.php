@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Application extends Model
 {
     use HasFactory;
+
+    public function privileges()
+    {
+        return $this->hasMany(ApplicationsEmployeesPrivilege::class , 'application_id');
+    }
 }
