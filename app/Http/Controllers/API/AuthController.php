@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -40,7 +41,13 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        $id = auth()->user()->id;
+
+        $employee = Employee::find($id);
+
+        $employee->getAllInformations();
+
+        return response()->json($employee);
     }
 
     /**
