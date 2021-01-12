@@ -36,7 +36,21 @@ class ProfilsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employee = new Employee();
+
+        $employee->login = $request->input('login');
+        $employee->firstname = $request->input('firstname');
+        $employee->lastname = $request->input('lastname');
+        $employee->address = $request->input('address');
+        $employee->city = $request->input('city');
+        $employee->phone = $request->input('lastname');
+        $employee->releaseDate = $request->input('releaseDate');
+        $employee->entryDate = $request->input('entryDate');
+        $employee->active = $request->input('active');
+        $employee->sectorDistrict_id = $request->input('sectorDistrict_id');
+
+
+        return response()->json($employee->save());
     }
 
     /**

@@ -10,6 +10,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class Employee extends Authenticatable implements JWTSubject
 {
+    public $timestamps = false;
     use HasFactory, Notifiable;
 
     //This class is the auth class
