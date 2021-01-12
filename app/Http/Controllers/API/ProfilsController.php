@@ -7,6 +7,7 @@ use App\Models\Employee;
 use App\Models\Sector;
 use App\Models\SectorDistrict;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class ProfilsController extends Controller
@@ -45,10 +46,14 @@ class ProfilsController extends Controller
         $employee->address = $request->input('address');
         $employee->city = $request->input('city');
         $employee->phone = $request->input('lastname');
-        $employee->releaseDate = $request->input('releaseDate');
-        $employee->entryDate = $request->input('entryDate');
+        //$employee->releaseDate = $request->input('releaseDate');
+        //$employee->entryDate = $request->input('entryDate');
         $employee->active = $request->input('active');
+        $employee->password = Hash::make($request->input('password'));
         $employee->sectorDistrict_id = $request->input('sectorDistrict_id');
+        $employee->code = $request->input('code');
+        $employee->postalCode = $request->input('postalCode');
+        $employee->leader_id = $request->input('leader_id');
 
 
         return response()->json($employee->save());
@@ -97,8 +102,9 @@ class ProfilsController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['message'=>'error']);
+            return response()->json(['message' => 'error']);
         }
+
 
         $employee->login = $request->input('login');
         $employee->code = $request->input('code');
@@ -110,6 +116,10 @@ class ProfilsController extends Controller
         $employee->address = $request->input('address');
         $employee->city = $request->input('city');
         $employee->phone = $request->input('phone');
+        $employee->password = Hash::make($request->input('password'));
+        $employee->active = $request->input('active');
+
+
 
         return response()->json($employee->save());
 
@@ -123,6 +133,9 @@ class ProfilsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = Employee::find($id);
+
+        $employee->delete();
+        return response()->json(['status' => 'Success', 'Message' => 'Employee Deleted']);
     }
 }

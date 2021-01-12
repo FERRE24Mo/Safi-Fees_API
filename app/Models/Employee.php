@@ -13,7 +13,7 @@ class Employee extends Authenticatable implements JWTSubject
     public $timestamps = false;
     use HasFactory, Notifiable;
 
-    public $timestamps = false;
+
 
     //This class is the auth class
 
