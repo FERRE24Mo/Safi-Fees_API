@@ -51,7 +51,7 @@ class SheetsController extends Controller
     }
 
     public function validated($employee_id){
-        $sheets = ExpenseSheet::where('expenseSheetState_id','5','and','3')->where('employee_id', $employee_id)->get();
+        $sheets = ExpenseSheet::where('expenseSheetState_id','5')->orWhere('expenseSheetState_id','3')->where('employee_id', $employee_id)->get();
 
         return response()->json([$sheets]);
     }
@@ -62,8 +62,8 @@ class SheetsController extends Controller
         return response()->json([$sheets]);
     }
 
-    public function waitingAndError($employee_id){
-        $sheets = ExpenseSheet::where('expenseSheetState_id','6','and','2')->where('employee_id', $employee_id)->get();
+    public function inWaitingAndError($employee_id){
+        $sheets = ExpenseSheet::where('expenseSheetState_id','6')->orWhere('expenseSheetState_id','2')->where('employee_id', $employee_id)->get();
 
         return response()->json([$sheets]);
     }
@@ -82,12 +82,14 @@ class SheetsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $sheet_id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($sheet_id)
     {
-        //
+        $sheet = ExpenseSheet::find($sheet_id);
+
+        return response()->json($sheet);
     }
 
     /**
@@ -110,8 +112,10 @@ class SheetsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($sheet_id)
     {
-        //
+        $currentSheet = ExpenseSheet::find($sheet_id);
+
+        return response()->json(['Status'=>$currentSheet->delete()]);
     }
 }

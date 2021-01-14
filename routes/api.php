@@ -27,10 +27,6 @@ Route::get('/', function () {
 });
 
 
-
-
-
-
 //token jwt
 Route::group([
 
@@ -68,11 +64,12 @@ Route::middleware('jwt.auth')->group(function (){
     Route::get('sheets/{employee_id}/current',[\App\Http\Controllers\API\SheetsController::class,'current']);
     Route::get('sheets/{employee_id}/last',[\App\Http\Controllers\API\SheetsController::class,'last']);
     Route::get('sheets/user/{employee_id}/historical',[\App\Http\Controllers\API\SheetsController::class,'historical']);
-    Route::get('sheets/user/{employee_id}',[\App\Http\Controllers\API\SheetsController::class,'validate']);
-    Route::get('sheets/user/{employee_id}',[\App\Http\Controllers\API\SheetsController::class,'unvalidated']);
-    Route::get('sheets/user/{employee_id}',[\App\Http\Controllers\API\SheetsController::class,'waitingAndError']);
-    Route::get('sheets/user/{employee_id}',[\App\Http\Controllers\API\SheetsController::class,'waitingAndError']);
+    Route::get('sheets/user/{employee_id}/validated',[\App\Http\Controllers\API\SheetsController::class,'validated']);
+    Route::get('sheets/user/{employee_id}/unvalidated',[\App\Http\Controllers\API\SheetsController::class,'unvalidated']);
+    Route::get('sheets/user/{employee_id}/inWaitingAndError',[\App\Http\Controllers\API\SheetsController::class,'inWaitingAndError']);
 
+    Route::get('sheet/{sheet_id}',[\App\Http\Controllers\API\SheetsController::class,'show']);
+    Route::delete('sheet/{sheet_id}',[\App\Http\Controllers\API\SheetsController::class,'destroy']);
 
     Route::apiResource('sheets',\App\Http\Controllers\API\SheetsController::class);
 
