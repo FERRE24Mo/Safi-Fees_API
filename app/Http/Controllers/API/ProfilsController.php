@@ -84,8 +84,6 @@ class ProfilsController extends Controller
     {
         $int11 = "99999999999";
 
-        $employee = Employee::find($id);
-
         $validator = Validator::make($request->all(), [
             'login'=>'required|string|max:45',
             'code'=>'required|string|max:5',
@@ -103,23 +101,7 @@ class ProfilsController extends Controller
             return response()->json(['message' => 'error']);
         }
 
-
-        $employee->login = $request->input('login');
-        $employee->code = $request->input('code');
-        $employee->leader_id = $request->input('leader_id');
-        $employee->sectorDistrict_id = $request->input('sectorDistrict_id');
-        $employee->postalCode = $request->input('postalCode');
-        $employee->firstname = $request->input('firstname');
-        $employee->lastname = $request->input('lastname');
-        $employee->address = $request->input('address');
-        $employee->city = $request->input('city');
-        $employee->phone = $request->input('phone');
-        $employee->password = Hash::make($request->input('password'));
-        $employee->active = $request->input('active');
-
-
-
-        return response()->json($employee->save());
+        return response()->json(Employee::find($id)->update($request->all()));
 
     }
 
