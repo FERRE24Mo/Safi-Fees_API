@@ -9,6 +9,8 @@ class Practitioner extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function visits(){
         return $this->hasMany('App\Models\Visit');
     }

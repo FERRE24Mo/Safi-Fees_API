@@ -17,8 +17,17 @@ class EmployeeSeeder extends Seeder
     {
         DB::table('employees')->insert([
             'sectorDistrict_id'=> 1 ,
-            'login'=> 'jhonDoe',
-            'password'=> Hash::make('password')
+            'login'=> 'samsampanda',
+            'password'=> Hash::make('password'),
+            'code'=> 'a92',
+            'leader_id'=> '55',
+            'postalCode'=> '85000',
+            'firstname'=> 'samy',
+            'lastname'=> 'alexandre',
+            'address'=> '10 rue jean moulin',
+            'city'=> 'La roche sur yon',
+            'phone'=> '0661785948',
+            'entryDate'=> '1995-01-12',
         ]);
     }
 }
