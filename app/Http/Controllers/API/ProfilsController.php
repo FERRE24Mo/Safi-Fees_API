@@ -12,13 +12,12 @@ use Illuminate\Support\Facades\Validator;
 
 class ProfilsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-
     public function index()
     {
         $employees = Employee::all();
@@ -26,7 +25,6 @@ class ProfilsController extends Controller
         foreach ($employees as $employee){
             $employee->getAllInformations();
         }
-
         return response()->json($employees);
     }
 
