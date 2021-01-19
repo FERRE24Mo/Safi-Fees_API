@@ -80,7 +80,7 @@ class ProfilsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id)
     {
@@ -102,8 +102,11 @@ class ProfilsController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => 'error']);
         }
+        $inputs = $request->all();
 
-        return response()->json(Employee::find($id)->update($request->all()));
+        Employee::find($id)->update($inputs);
+
+        return response()->json();
 
     }
 
