@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 /**
  * Test des models de l'api
  */
+
 Route::get('/', function () {
     $visit = \App\Models\Employee::find(56);
     $visit->visits;
@@ -61,16 +62,17 @@ Route::middleware('jwt.auth')->group(function (){
     Route::apiResource('sheets',\App\Http\Controllers\API\SheetsController::class);
 
 
-
     /**
      * profils
      */
     Route::apiResource('profils',\App\Http\Controllers\API\ProfilsController::class);
 
+
     /**
      * practitioners
      */
     Route::apiResource('practitioners',\App\Http\Controllers\API\PractitionersController::class);
+
 
 });
 
