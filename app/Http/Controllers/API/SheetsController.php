@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\ExpenseSheet;
 use Illuminate\Http\Request;
+use Jenssegers\Date\Date;
 
 class SheetsController extends Controller
 {
@@ -21,17 +22,50 @@ class SheetsController extends Controller
 
     }
 
-    public function current(){
-        $currentSheet = ExpenseSheet::firstwhere('sheetState_id',1);
+    public function current($employee_id){
 
-        return response()->json($currentSheet);
+        $date = new Date();
+        $date = $date::now()->format('Y-m');
+
+
+        $currentSheet = ExpenseSheet::where('creationDate', 'like', $date . '-%')->where('employee_id', $employee_id)->get();
+
+        return response()->json([$currentSheet]);
     }
 
-    public function currentUpdate($request, $id){
+    public function last($employee_id){
 
-        $currentSheet = ExpenseSheet::where('sheetState_id', 1);
+        $date = new Date();
+        $date = $date::now()->sub('1 month')->format('Y-m');
 
-        return response()->json($currentSheet);
+        $currentSheet = ExpenseSheet::where('creationDate', 'like', $date . '-%')->where('employee_id', $employee_id)->get();
+
+        return response()->json([$currentSheet]);
+    }
+
+    public function historical($employee_id){
+
+        $sheets = ExpenseSheet::where('expenseSheetState_id','<>','1')->where('employee_id', $employee_id)->get();
+
+        return response()->json([$sheets]);
+    }
+
+    public function validated($employee_id){
+        $sheets = ExpenseSheet::where('expenseSheetState_id','5')->orWhere('expenseSheetState_id','3')->where('employee_id', $employee_id)->get();
+
+        return response()->json([$sheets]);
+    }
+
+    public function unvalidated($employee_id){
+        $sheets = ExpenseSheet::where('expenseSheetState_id','4')->where('employee_id', $employee_id)->get();
+
+        return response()->json([$sheets]);
+    }
+
+    public function inWaitingAndError($employee_id){
+        $sheets = ExpenseSheet::where('expenseSheetState_id','6')->orWhere('expenseSheetState_id','2')->where('employee_id', $employee_id)->get();
+
+        return response()->json([$sheets]);
     }
 
     /**
@@ -48,12 +82,14 @@ class SheetsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $sheet_id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($sheet_id)
     {
-        //
+        $sheet = ExpenseSheet::find($sheet_id);
+
+        return response()->json($sheet);
     }
 
     /**
@@ -65,7 +101,9 @@ class SheetsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $currentSheet = ExpenseSheet::find($id);
+
+        return response()->json($currentSheet);
     }
 
     /**
@@ -74,8 +112,10 @@ class SheetsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($sheet_id)
     {
-        //
+        $currentSheet = ExpenseSheet::find($sheet_id);
+
+        return response()->json(['Status'=>$currentSheet->delete()]);
     }
 }

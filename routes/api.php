@@ -19,21 +19,20 @@ use Illuminate\Support\Facades\Route;
  * Test des models de l'api
  */
 
+
 Route::get('/', function () {
-    $visit = \App\Models\Employee::find(56);
-    $visit->visits;
-    $visit->visits[0]->practitioner;
-    return response()->json($visit);
+    $employees = \App\Models\Employee::all();
+    foreach ($employees as $employee){
+        $employee->visits;
+    }
+    return response()->json($employees);
     //test
 });
-
-
-
 
 //token jwt
 Route::group([
 
-    'middleware' => 'api',
+    'middleware' => ['api'],
     'prefix' => 'auth'
 
 ], function ($router) {
@@ -58,13 +57,35 @@ Route::middleware('jwt.auth')->group(function (){
      *
      * Sheets
      */
-    Route::get('sheets/current',[\App\Http\Controllers\API\SheetsController::class,'current']);
+    Route::get('sheets/{employee_id}/current',[\App\Http\Controllers\API\SheetsController::class,'current']);
+    Route::get('sheets/{employee_id}/last',[\App\Http\Controllers\API\SheetsController::class,'last']);
+    Route::get('sheets/user/{employee_id}/historical',[\App\Http\Controllers\API\SheetsController::class,'historical']);
+    Route::get('sheets/user/{employee_id}/validated',[\App\Http\Controllers\API\SheetsController::class,'validated']);
+    Route::get('sheets/user/{employee_id}/unvalidated',[\App\Http\Controllers\API\SheetsController::class,'unvalidated']);
+    Route::get('sheets/user/{employee_id}/inWaitingAndError',[\App\Http\Controllers\API\SheetsController::class,'inWaitingAndError']);
+
+    Route::get('sheet/{sheet_id}',[\App\Http\Controllers\API\SheetsController::class,'show']);
+    //Route::put('sheet/{sheet_id',[\App\Http\Controllers\API\SheetsController::class,'update']);
+    Route::delete('sheet/{sheet_id}',[\App\Http\Controllers\API\SheetsController::class,'destroy']);
+
     Route::apiResource('sheets',\App\Http\Controllers\API\SheetsController::class);
 
 
     /**
+     * Sectorr district
+     */
+
+    Route::get('sectorDistricts',[\App\Http\Controllers\API\SectorDistrictController::class , 'index']);
+
+    /**
+     * web
+     */
+
+    /**
      * profils
      */
+    Route::post('/profils/status/{id}',[\App\Http\Controllers\API\ProfilsController::class , 'status']);
+
     Route::apiResource('profils',\App\Http\Controllers\API\ProfilsController::class);
 
 

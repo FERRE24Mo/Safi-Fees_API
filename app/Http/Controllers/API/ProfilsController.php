@@ -82,13 +82,8 @@ class ProfilsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $int11 = "99999999999";
-
         $validator = Validator::make($request->all(), [
             'login'=>'required|string|max:45',
-            'code'=>'required|string|max:5',
-            'sectorDistrict_id'=>'required|numeric|max:'.$int11,
-            'leader_id'=>'numeric|max:'.$int11,
             'postalCode'=>'required|string|max:5',
             'firstname'=>'required|string|max:255',
             'lastname'=>'required|string|max:255',
@@ -98,13 +93,21 @@ class ProfilsController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['message' => 'error']);
+            return response()->json(['message' => 'error'],333);
         }
-        $inputs = $request->all();
 
-        Employee::find($id)->update($inputs);
+        $employee = Employee::find($id);
 
-        return response()->json();
+        $employee->login = $request->input('login');
+        $employee->postalCode = $request->input('postalCode');
+        $employee->firstname = $request->input('firstname');
+        $employee->lastname = $request->input('lastname');
+        $employee->address = $request->input('address');
+        $employee->phone = $request->input('phone');
+        $employee->city = $request->input('city');
+        $employee->sectorDistrict_id = $request->input('sectorDistrict_id');
+
+        return response()->json($employee->save());
 
     }
 
@@ -120,5 +123,22 @@ class ProfilsController extends Controller
 
         $employee->delete();
         return response()->json(['status' => 'Success', 'Message' => 'Employee Deleted']);
+    }
+
+    public function status(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'active'=> 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => 'error'],333);
+        }
+
+        $employee = Employee::find($id);
+
+        $employee->active = $request->input('active');
+
+        return response()->json($employee->save());
     }
 }
