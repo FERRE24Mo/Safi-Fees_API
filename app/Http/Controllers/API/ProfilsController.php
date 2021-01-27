@@ -9,6 +9,7 @@ use App\Models\SectorDistrict;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ProfilsController extends Controller
 {
@@ -38,21 +39,27 @@ class ProfilsController extends Controller
     {
         $employee = new Employee();
 
+        $employee->code = Str::random(4);
+
         $employee->login = $request->input('login');
         $employee->firstname = $request->input('firstname');
         $employee->lastname = $request->input('lastname');
         $employee->address = $request->input('address');
         $employee->city = $request->input('city');
-        $employee->phone = $request->input('lastname');
+        $employee->phone = $request->input('phone');
         //$employee->releaseDate = $request->input('releaseDate');
-        //$employee->entryDate = $request->input('entryDate');
+        $employee->entryDate = $request->input('entryDate');
         $employee->active = $request->input('active');
         $employee->password = Hash::make($request->input('password'));
         $employee->sectorDistrict_id = $request->input('sectorDistrict_id');
         $employee->code = $request->input('code');
         $employee->postalCode = $request->input('postalCode');
-        $employee->leader_id = $request->input('leader_id');
-
+        if ($request->input('leader_id') == 0){
+            $employee->leader_id = NULL;
+        }
+        else{
+            $employee->leader_id = $request->input('leader_id');
+        }
 
         return response()->json($employee->save());
     }
@@ -90,6 +97,7 @@ class ProfilsController extends Controller
             'address'=>'required|string|max:255',
             'city'=>'required|string|max:255',
             'phone'=>'required|string|max:10',
+            'leader_id'=>'max:10'
         ]);
 
         if ($validator->fails()) {
@@ -107,6 +115,14 @@ class ProfilsController extends Controller
         $employee->city = $request->input('city');
         $employee->sectorDistrict_id = $request->input('sectorDistrict_id');
 
+        if ($request->input('leader_id')){
+            if ($request->input('leader_id') == 0){
+                $employee->leader_id = NULL;
+            }
+            else{
+                $employee->leader_id = $request->input('leader_id');
+            }
+        }
         return response()->json($employee->save());
 
     }
@@ -132,7 +148,7 @@ class ProfilsController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['message' => 'error'],333);
+            return response()->json(false);
         }
 
         $employee = Employee::find($id);
@@ -141,4 +157,5 @@ class ProfilsController extends Controller
 
         return response()->json($employee->save());
     }
+
 }
