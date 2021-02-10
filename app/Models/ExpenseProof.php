@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ExpenseProof extends Model
 {
     use HasFactory;
+
+    public function typeProof()
+    {
+        return $this->belongsTo(ExpenseProofType::class, 'expenseProofType_id');
+    }
 }

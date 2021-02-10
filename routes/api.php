@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Route;
  * Test des models de l'api
  */
 
-
 Route::get('/', function () {
     $employees = \App\Models\Employee::all();
     foreach ($employees as $employee){
@@ -65,7 +64,7 @@ Route::middleware('jwt.auth')->group(function (){
     Route::get('sheets/user/{employee_id}/inWaitingAndError',[\App\Http\Controllers\API\SheetsController::class,'inWaitingAndError']);
 
     Route::get('sheet/{sheet_id}',[\App\Http\Controllers\API\SheetsController::class,'show']);
-    //Route::put('sheet/{sheet_id',[\App\Http\Controllers\API\SheetsController::class,'update']);
+    Route::put('sheet/{sheet_id}',[\App\Http\Controllers\API\SheetsController::class,'update']);
     Route::delete('sheet/{sheet_id}',[\App\Http\Controllers\API\SheetsController::class,'destroy']);
 
     Route::apiResource('sheets',\App\Http\Controllers\API\SheetsController::class);
@@ -84,6 +83,7 @@ Route::middleware('jwt.auth')->group(function (){
     /**
      * profils
      */
+
     Route::post('/profils/status/{id}',[\App\Http\Controllers\API\ProfilsController::class , 'status']);
 
     Route::apiResource('profils',\App\Http\Controllers\API\ProfilsController::class);
